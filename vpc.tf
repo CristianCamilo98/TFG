@@ -1,12 +1,13 @@
 variable "project_id" {
-  description = "project id"
+  description = "projecto-demo-290916"
 }
 
 variable "region" {
-  description = "region"
+  description = "europe-west1"
 }
 
 provider "google" {
+  credentials = file("Projecto-demo-dea218aad50c.json")
   project = var.project_id
   region  = var.region
 }
@@ -23,4 +24,18 @@ resource "google_compute_subnetwork" "subnet" {
   region        = var.region
   network       = google_compute_network.vpc.name
   ip_cidr_range = "10.10.0.0/24"
+}
+
+#Firewall rule allowing traffic
+
+resource "google_compute_firewall" "allow_http" {
+  name    = "allow-htt"
+  network = google_compute_network.vpc.name
+
+
+  allow {
+    protocol = "tcp"
+    ports    = ["80", "8080"]
+  }
+
 }

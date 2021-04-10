@@ -9,14 +9,19 @@ variable "gke_password" {
 }
 
 variable "gke_num_nodes" {
-  default     = 1
+  default     = 3
   description = "number of gke nodes"
+}
+
+variable "zone"{
+  default     = "europe-west1-b"
+  description = "Zone where the cluster will be"
 }
 
 # GKE cluster
 resource "google_container_cluster" "primary" {
   name     = "${var.project_id}-gke"
-  location = var.region
+  location = var.zone
 
   remove_default_node_pool = true
   initial_node_count       = 1
@@ -37,7 +42,7 @@ resource "google_container_cluster" "primary" {
 # Separately Managed Node Pool
 resource "google_container_node_pool" "primary_nodes" {
   name       = "${google_container_cluster.primary.name}-node-pool"
-  location   = var.region
+  location   = var.zone
   cluster    = google_container_cluster.primary.name
   node_count = var.gke_num_nodes
 
@@ -52,7 +57,7 @@ resource "google_container_node_pool" "primary_nodes" {
     }
 
     # preemptible  = true
-    machine_type = "e2-small"
+    machine_type = "n1-standard-1"
     tags         = ["gke-node", "${var.project_id}-gke"]
     metadata = {
       disable-legacy-endpoints = "true"
@@ -70,5 +75,5 @@ resource "google_container_node_pool" "primary_nodes" {
 
 provider "kubernetes" {
   config_path    = "~/.kube/config"
-  config_context = "my-context"
+  #config_context = "my-context"
 }
