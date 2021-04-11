@@ -13,4 +13,14 @@ terraform {
   required_version = "~> 0.14"
 }
 
+provider "google" {
+  credentials = file("Projecto-demo-dea218aad50c.json")
+  project = var.project_id
+  region  = var.region
+}
 
+provider "google-beta" {
+  credentials = file("Projecto-demo-dea218aad50c.json")
+  project = var.project_id
+  region  = var.region
+}

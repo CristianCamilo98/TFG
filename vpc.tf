@@ -6,12 +6,6 @@ variable "region" {
   description = "europe-west1"
 }
 
-provider "google" {
-  credentials = file("Projecto-demo-dea218aad50c.json")
-  project = var.project_id
-  region  = var.region
-}
-
 # VPC
 resource "google_compute_network" "vpc" {
   name                    = "${var.project_id}-vpc"
