@@ -1,4 +1,5 @@
 *.json
+istio-1.10.2/
 terraform.tfstate.backup
 .terraform.lock.hcl
 *.tfstate
