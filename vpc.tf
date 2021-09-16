@@ -23,13 +23,13 @@ resource "google_compute_subnetwork" "subnet" {
 #Firewall rule allowing traffic
 
 resource "google_compute_firewall" "allow_http" {
-  name    = "allow-htt"
+  name    = "allow-http"
   network = google_compute_network.vpc.name
 
 
   allow {
     protocol = "tcp"
-    ports    = ["80", "8080"]
+    ports    = ["80", "8080","30000"]
   }
 
 }
