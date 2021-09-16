@@ -23,3 +23,5 @@ kubectl apply -f book-source-code/services/catalog/kubernetes/catalog.yaml
 ## Deployng wepbapp
 kubectl apply -f book-source-code/services/webapp/kubernetes/webapp.yaml
 
+##
+kubectl apply -f book-source-code/ch2/ingress-gateway.yaml
