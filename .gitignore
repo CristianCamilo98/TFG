@@ -6,3 +6,4 @@ terraform.tfstate.backup
 .terraform
 *.o
 deployments/
+book-source-code/
