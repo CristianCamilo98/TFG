@@ -12,11 +12,5 @@ kubens istioinaction
 #istioctl kube-inject -f book-source-code/services/catalog/kubernetes/catalog.yaml
 ## Or you can activate that automatically in a certain workspace Istio will automatically inject the sidecar proxy 
 
-## Create catalog deployment 
-kubectl apply -f book-source-code/services/catalog/kubernetes/catalog.yaml
-
-## Deployng wepbapp
-kubectl apply -f book-source-code/services/webapp/kubernetes/webapp.yaml
-
 ##
 kubectl apply -f book-source-code/ch2/ingress-gateway.yaml
