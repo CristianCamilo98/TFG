@@ -53,7 +53,7 @@ resource "kubernetes_deployment" "catalog" {
   }
 
   spec {
-    replicas = 3
+    replicas = 1
 
     selector {
       match_labels = {
@@ -73,8 +73,8 @@ resource "kubernetes_deployment" "catalog" {
         service_account_name = kubernetes_service_account.service_account_catalog.metadata.0.name
         container {
           env {
-            name = kubernetes_namespace.istio_namespace.metadata.0.name
-            value = kubernetes_service_account.service_account_catalog.metadata.0.name
+            name = "KUBERNETES_NAMESPACE"
+            value = kubernetes_namespace.istio_namespace.metadata.0.name
             }
           image = "eu.gcr.io/projecto-demo-290916/istioinaction/catalog"
           name  = "catalog"
