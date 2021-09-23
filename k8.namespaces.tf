@@ -9,6 +9,6 @@ resource "kubernetes_namespace" "istio_namespace" {
     }
     name = "istioinaction"
   }
-  depends_on = [google_container_node_pool.primary_nodes]
+  depends_on = [null_resource.install_istio]
 }
 
