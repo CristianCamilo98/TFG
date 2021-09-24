@@ -13,4 +13,3 @@ spec:
       attempts: 3
       retryOn: 5xx
       perTryTimeout: 2s
-

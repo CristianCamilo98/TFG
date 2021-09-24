@@ -1,4 +1,5 @@
 #With this we will let Istio know how to differenciate between different versions of our catalog service
+#Inside the k8s.catalog.tf on the deployment configuration it has been set the 
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
