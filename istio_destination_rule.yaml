@@ -1,5 +1,8 @@
 #With this we will let Istio know how to differenciate between different versions of our catalog service
-#Inside the k8s.catalog.tf on the deployment configuration it has been set the 
+#Inside the k8s.catalog.tf on the deployment configuration it has been set the label app and version which 
+#Istio will automatically asigns those values to self generated lables call service.istio.io/canonical-name a
+#nd service.istio.io/canonical-revision, with this variables Istio will split the traffic
+#
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
