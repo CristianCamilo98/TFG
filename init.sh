@@ -13,4 +13,4 @@ kubens istioinaction
 ## Or you can activate that automatically in a certain workspace Istio will automatically inject the sidecar proxy 
 
 ##
-kubectl apply -f book-source-code/ch2/ingress-gateway.yaml
+kubectl apply -f istio_examples/
