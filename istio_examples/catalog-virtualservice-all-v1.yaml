@@ -1,3 +1,5 @@
+#Once we have set the destination rule we can split the traffic like we want. With this example we are sending all traffic of the hosts catalog to the pods 
+#that belongs to the subset version-v1 which on the destinationrule we have set that are pods that have the  label of version: v1
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:

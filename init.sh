@@ -13,4 +13,6 @@ kubens istioinaction
 ## Or you can activate that automatically in a certain workspace Istio will automatically inject the sidecar proxy 
 
 ##
-kubectl apply -f istio_examples/
+kubectl apply -f istio_examples/ingress-gateway.yaml
+
+#Make pod return error
