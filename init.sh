@@ -16,3 +16,8 @@ kubens istioinaction
 kubectl apply -f istio_examples/ingress-gateway.yaml
 
 #Make pod return error
+#istio_examples/chaos.sh 500 50
+#istio_examples/chaos.sh 500 delete
+
+# In order to deplay the dashboards of the addons run:
+# istioctl dashboard (jaeger|grafana|kiali|prometheus)
