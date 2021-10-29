@@ -1,0 +1,30 @@
+import requests
+import json
+import os
+import datetime
+
+api_key = os.getenv('OPENWEATHERMAP_API_KEY')
+
+def get_meteo_for_locality(locality):
+    payload = {
+            'q': locality + ',ES',
+            'appid': api_key,
+            'units': 'metric'
+    }
+
+    endpoint = "http://api.openweathermap.org/data/2.5/weather"
+    r = requests.get(endpoint, params=payload)
+
+    if r.status_code == 200:
+        meteodata = r.json()
+        return meteodata["main"]["temp"]
+    else:
+        return None
+
+
+
+if __name__ == '__main__':
+    import sys
+    meteoinfo = get_meteo_for_locality(sys.argv[1])
+    print(f"La temperatura de {sys.argv[1]} es {meteoinfo}")
+    

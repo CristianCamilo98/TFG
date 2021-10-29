@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  mysql:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "securepassword"
+      MYSQL_DATABASE: "flask_pre_models"
+      MYSQL_USER: "flask_pre"
+      MYSQL_PASSWORD: "securepassword"
+    volumes:
+      - ./schemas:/var/lib/mysql:rw
+

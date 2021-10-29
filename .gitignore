@@ -10,3 +10,5 @@ terraform.tfstate.backup
 deployments/
 book-source-code/
 istio-code/
+web-app-demo/schemas/
+*.swp
