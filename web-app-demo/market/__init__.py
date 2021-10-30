@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_restful import Api, Resource
+from flask_marshmallow import Marshmallow
 import os
 # LOADING ENVIRONMENT VARIABLES
 api_key = os.getenv('OPENWEATHERMAP_API_KEY')
@@ -16,6 +17,8 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 api = Api(app)
+ma = Marshmallow(app)
+
 login_manager.login_view = "login_page"
 login_manager.login_message_category = "info"
 from market import routes

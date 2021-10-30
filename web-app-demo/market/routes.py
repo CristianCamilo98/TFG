@@ -1,11 +1,14 @@
 from market import app
 from flask import render_template, redirect, url_for, flash
-from market.models import Item, User
+from market.models import Item, User, UserSchema, ItemSchema 
 from market.forms import RegisterForm, LoginForm
 from market import db
 from flask_login import login_user, logout_user, login_required
 from market.weather_api import get_meteo_for_locality
 from flask import request
+from market  import api
+from flask_restful import Resource
+
 
 @app.route('/')
 @app.route('/home')
@@ -62,3 +65,44 @@ def logout_page():
     
 
 
+
+
+####### APIS ##########
+
+
+names = {
+        "cristian": {"age": 23, "gender": "male"},
+         "rebeca" : {"age": 23, "gender": "female"}
+        }
+
+class user_api(Resource):
+    def get(self,name):
+        if name != "all":
+            user_schema = UserSchema()
+            user_db = User.query.filter_by(username=name).first()
+            output = user_schema.dump(user_db)
+        else:
+            user_schema = UserSchema(many=True)
+            user_db = User.query.all()
+            output = user_schema.dump(user_db)
+
+            
+        return output   
+
+    def post(self):
+        return {"data": "Post"}
+
+
+class item_api(Resource):
+    def get(self,item):
+        item_schema = ItemSchema()
+        item_db = Item.query.filter_by(name=item).first()
+        output = item_schema.dump(item_db)
+        return output   
+
+    def post(self):
+        return {"data": "Post"}
+
+
+api.add_resource(user_api,"/api/user/<string:name>")
+api.add_resource(item_api,"/api/item/<string:item>")

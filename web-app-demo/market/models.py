@@ -1,5 +1,4 @@
-from market import db, login_manager
-from market import bcrypt
+from market import db, login_manager, bcrypt, ma 
 from flask_login import UserMixin
 
 @login_manager.user_loader
@@ -43,3 +42,13 @@ class Item(db.Model):
     owner = db.Column(db.Integer(), db.ForeignKey('user.id'))
     def __repr__(self):
         return f'Item {self.name}'
+
+class UserSchema(ma.SQLAlchemyAutoSchema):
+    class Meta():
+        model = User
+
+class ItemSchema(ma.SQLAlchemyAutoSchema):
+    class Meta():
+        model = Item
+
+
