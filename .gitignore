@@ -1,4 +1,5 @@
 *.json
+*.backup
 *.pyc
 notes
 .terraform.tfstate.lock.info
