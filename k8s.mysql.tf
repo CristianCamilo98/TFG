@@ -46,7 +46,6 @@ resource "kubernetes_stateful_set" "mysql" {
       metadata {
         labels = {
           app = "mysql"
-            namespace = kubernetes_namespace.istio_namespace.metadata.0.name 
         }
       }
 
@@ -54,8 +53,12 @@ resource "kubernetes_stateful_set" "mysql" {
         
         container {
           name              = "mysql"
-          image             = "eu.gcr.io/projecto-demo-290916/mysql"
-          image_pull_policy = "IfNotPresent"
+          image             = "eu.gcr.io/projecto-demo-290916/mysql:pro2021110201"
+          image_pull_policy = "Always"
+
+          port {
+            container_port = 3306
+          }
 
           env { 
              name = "MYSQL_ROOT_PASSWORD"
@@ -94,5 +97,27 @@ resource "kubernetes_stateful_set" "mysql" {
         }
       }
     }
+  }
+depends_on = [kubernetes_service.mysql_service]
+}
+
+resource "kubernetes_service" "mysql_service" {
+  metadata {
+    name = "mysql"
+    namespace = kubernetes_namespace.istio_namespace.metadata.0.name
+    labels = {
+      app = "mysql"
+    }
+  }
+  spec {
+    selector = {
+      app = "mysql"
+    }
+    port {
+      port        = 3306
+      protocol    = "TCP"
+      name        = "mysql"
+    }
+    cluster_ip = "None"
   }
 }
