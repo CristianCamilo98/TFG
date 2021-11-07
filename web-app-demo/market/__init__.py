@@ -11,7 +11,7 @@ api_key = os.getenv('OPENWEATHERMAP_API_KEY')
 app = Flask(__name__)
 
 ## We add some configuration to the flask app in this case the database associated
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://flask_pre:securepassword@localhost/flask_pre_models'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://flask_pre:securepassword@mysql/flask_pre_models'
 app.config['SECRET_KEY'] = '506b2d9c135deeec805b7c59'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
