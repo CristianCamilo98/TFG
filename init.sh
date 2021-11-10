@@ -12,9 +12,6 @@ kubens istioinaction
 #istioctl kube-inject -f book-source-code/services/catalog/kubernetes/catalog.yaml
 ## Or you can activate that automatically in a certain workspace Istio will automatically inject the sidecar proxy 
 
-##
-kubectl apply -f istio_examples/ingress-gateway.yaml
-
 #Make pod return error
 #istio_examples/chaos.sh 500 50
 #istio_examples/chaos.sh 500 delete
