@@ -11,6 +11,7 @@ resource "kubernetes_service" "webappv2_service" {
     namespace = kubernetes_namespace.istio_namespace.metadata.0.name
     labels = {
       app = "webappv2"
+      version = "v2"
     }
   }
   spec {
@@ -33,6 +34,7 @@ resource "kubernetes_deployment" "webappv2" {
     name = "webappv2"
     labels = {
       app = "webappv2"
+      version = "v2"
     }
   }
   spec {
@@ -41,12 +43,14 @@ resource "kubernetes_deployment" "webappv2" {
     selector {
       match_labels = {
         app = "webappv2"
+        version = "v2"
       }
     }
     template {
       metadata {
         labels = {
           app = "webappv2"
+          version = "v2"
         }
       }
 
