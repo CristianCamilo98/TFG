@@ -53,7 +53,7 @@ resource "kubernetes_stateful_set" "mysql" {
         
         container {
           name              = "mysql"
-          image             = "eu.gcr.io/projecto-demo-290916/mysql:pro2021110201"
+          image             = "eu.gcr.io/projecto-demo-290916/mysql:pro202111301"
           image_pull_policy = "Always"
 
           port {
