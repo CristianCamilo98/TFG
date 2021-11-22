@@ -1,3 +1,8 @@
+# Here we specify the destination rules that later will be use by the virtualservices.
+# With this configuration we are routing all the request that goes to the service webapp to
+# 2 different locations depending on the version tag of the endpoints pods. In this case a request
+# that is routed to subset version-v2 it will go to the service webapp and then redirected to the pod
+# with the version: v2 label
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:

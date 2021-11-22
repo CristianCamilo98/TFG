@@ -1,3 +1,7 @@
+#Here we specify a virtual service which is "connected" to the flask-gateway. If the gateway
+#gets a request with the hosts tfg.com it will use this virtual service to redirect the request
+#in this case we have define 2 routes the default will go to the subset version-v2 and if 
+#the request comes with a header with value light it will go to subset version-v1
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
