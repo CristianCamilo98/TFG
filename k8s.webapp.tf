@@ -33,6 +33,7 @@ resource "kubernetes_deployment" "webapp" {
     name = "webapp"
     labels = {
       app = "webapp"
+      version = "v1"
     }
   }
   spec {
@@ -41,12 +42,14 @@ resource "kubernetes_deployment" "webapp" {
     selector {
       match_labels = {
         app = "webapp"
+        version = "v1"
       }
     }
     template {
       metadata {
         labels = {
           app = "webapp"
+          version = "v1"
         }
       }
 
@@ -54,29 +57,12 @@ resource "kubernetes_deployment" "webapp" {
         service_account_name = kubernetes_service_account.sa_webapp.metadata.0.name
         container {
           env {
-            name = "KUBERNETES_NAMESPACE"
-            value = kubernetes_namespace.istio_namespace.metadata.0.name
+            name = "OPENWEATHERMAP_API_KEY"
+            value = "556f63a821a1681ae3a3b9dd947c33da"
           }
-          env {
-            name = "CATALOG_SERVICE_HOST"
-            value = "catalog.istioinaction"
-          }
-          env {
-            name = "CATALOG_SERVICE_PORT"
-            value = "80"
-          }
-          env {
-            name  = "FORUM_SERVICE_HOST"
-            value = "forum.istioinaction"
-          }
-          env {
-            name = "FORUM_SERVICE_PORT"
-            value = "80"
-          }
-           
-          image = "eu.gcr.io/projecto-demo-290916/istioinaction/webapp"
+          image = "eu.gcr.io/projecto-demo-290916/flask-app-light:2021111402"
           name  = "webapp"
-          image_pull_policy = "IfNotPresent"
+          image_pull_policy = "Always"
           port {
             container_port = 8080
             name = "http"

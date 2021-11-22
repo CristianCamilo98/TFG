@@ -2,7 +2,7 @@
 
 if [ $1 == "500" ]; then
 
-    POD=$(kubectl get pod | grep catalog | grep -v v2 |awk '{ print $1 }')
+    POD=$(kubectl get pod | grep webapp | grep -v v2 |awk '{ print $1 }')
     echo $POD
 
     for p in $POD; do
