@@ -1,3 +1,3 @@
-resource "google_project_service" "service_account" {
+resource "google_project_service" "gke" {
   service = "container.googleapis.com"
 }

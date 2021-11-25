@@ -1,6 +1,6 @@
 resource "null_resource" "install_istio" {
   triggers = {
-    cluster_ep = google_container_cluster.primary.endpoint
+    cluster_ep = google_container_cluster.gke.endpoint
   }
 
   provisioner "local-exec" {
@@ -12,5 +12,5 @@ resource "null_resource" "install_istio" {
     EOT
   }
 
-  depends_on = [google_container_node_pool.primary_nodes]
+  depends_on = [google_container_node_pool.np]
 }

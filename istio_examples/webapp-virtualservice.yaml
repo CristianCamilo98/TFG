@@ -19,8 +19,8 @@ spec:
     route:
     - destination:
         host: webapp
-        subset: version-v1
+        subset: version-v2
   - route:
     - destination:
         host: webapp
-        subset: version-v2
+        subset: version-v1
