@@ -1,6 +1,14 @@
 #!/bin/bash
 istioctl verify-install
-kubectl apply -f istio-1.10.2/samples/addons/
+
+for i in $(seq 1 3);do
+    kubectl apply -f istio-1.10.2/samples/addons/
+    if [ $? -eq 0 ]
+    then
+        break
+    fi
+done
+
 
 ## Lets start deploying our application, we have downloaded the repository https://github.com/istioinaction/book-source-code
 ## First of all we will create a namespace in which we'll deployy our samples
