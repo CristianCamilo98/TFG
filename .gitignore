@@ -16,3 +16,4 @@ web-app-demo/schemas/
 *.swp
 web-app-demo/lib/python3.8/site-packages/
 web-app-demo/market/__pycache__/*
+preguntas_oscar
