@@ -16,3 +16,8 @@ spec:
     - destination:
         host: webapp
         subset: version-v2
+      weight: 10
+    - destination:
+        host: webapp
+        subset: version-v1
+      weight: 90
