@@ -1,0 +1,35 @@
+apiVersion: flagger.app/v1beta1
+kind: Canary
+metadata:
+  name: webapp-release
+  namespace: istioinaction
+spec:  
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: webapp
+  progressDeadlineSeconds: 60
+  # Service / VirtualService Config
+  service:
+    name: webapp
+    port: 80
+    targetPort: 8080
+    gateways:
+    - flask-gateway
+    hosts:
+    - "tfg.com"
+  analysis:
+    interval: 45s
+    threshold: 5
+    maxWeight: 50
+    stepWeight: 10
+    match: 
+    metrics:
+    - name: request-success-rate
+      thresholdRange:
+        min: 99
+      interval: 1m
+    - name: request-duration
+      thresholdRange:
+        max: 500
+      interval: 30s
