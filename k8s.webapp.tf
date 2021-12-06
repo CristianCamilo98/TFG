@@ -5,28 +5,6 @@ resource "kubernetes_service_account" "sa_webapp" {
   }
 }
 
-resource "kubernetes_service" "webapp_service" {
-  metadata {
-    name = "webapp"
-    namespace = kubernetes_namespace.istio_namespace.metadata.0.name
-    labels = {
-      app = "webapp"
-    }
-  }
-  spec {
-    selector = {
-      app = kubernetes_deployment.webapp.metadata.0.labels.app   
-    }
-    port {
-      port        = 80
-      target_port = 8080
-      protocol    = "TCP"
-      name        = "http"
-    }
-    type = "ClusterIP"
-  }
-}
-
 resource "kubernetes_deployment" "webapp" {
   metadata {
     namespace = kubernetes_namespace.istio_namespace.metadata.0.name
@@ -71,5 +49,11 @@ resource "kubernetes_deployment" "webapp" {
         }
       }
     }
+  }
+
+  lifecycle {
+    ignore_changes = [
+     spec.0.replicas
+    ]
   }
 }
