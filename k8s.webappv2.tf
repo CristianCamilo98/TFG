@@ -33,7 +33,7 @@ resource "kubernetes_deployment" "webappv2" {
           }
            
 
-          image = "eu.gcr.io/projecto-demo-290916/flask-app-light:2021111402"
+          image = "eu.gcr.io/projecto-demo-290916/flask-app-fail:2021121101"
           name  = "webappv2"
           image_pull_policy = "Always"
           port {
