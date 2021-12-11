@@ -12,15 +12,13 @@ spec:
   gateways:
   - flask-gateway
   http:
-  - match:
-    - headers:
-        type:
-          exact: "light"
-    route:
-    - destination:
-        host: webapp
-        subset: version-v2
   - route:
     - destination:
         host: webapp
         subset: version-v1
+      weight: 100
+    mirror:
+      host: webapp
+      subset: version-v2
+    mirrorPercentage:
+      value: 50.0
