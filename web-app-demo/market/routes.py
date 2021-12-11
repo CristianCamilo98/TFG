@@ -8,12 +8,17 @@ from market.weather_api import get_meteo_for_locality
 from flask import request
 from market  import api
 from flask_restful import Resource
+from random import randrange
+from flask_api import status
 
 
 @app.route('/')
 @app.route('/home')
 def home_page(): 
-    return render_template('home.html')
+    if randrange(10) > 6:
+        return "Record not found", status.HTTP_400_BAD_REQUEST
+    else:
+        return render_template('home.html')
 
 @app.route('/market')
 @login_required
