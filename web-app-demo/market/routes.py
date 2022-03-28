@@ -1,5 +1,5 @@
 from market import app
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, jsonify
 from market.models import Item, User, UserSchema, ItemSchema 
 from market.forms import RegisterForm, LoginForm
 from market import db
@@ -8,6 +8,7 @@ from market.weather_api import get_meteo_for_locality
 from flask import request
 from market  import api
 from flask_restful import Resource
+import requests
 
 
 @app.route('/')
@@ -63,7 +64,16 @@ def logout_page():
     flash(f"You have been logged out!", category='info')
     return redirect(url_for('home_page'))
     
+@app.route('/call-backend')
+def call_backend():
+    endpoint = "http://simple-backend"
 
+    r = requests.get(endpoint)
+
+    if r.status_code == 200:
+        return jsonify(r.json())
+    else:
+        return "Error accesing simple-backend"
 
 
 
