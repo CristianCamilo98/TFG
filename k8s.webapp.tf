@@ -60,7 +60,7 @@ resource "kubernetes_deployment" "webapp" {
             name = "OPENWEATHERMAP_API_KEY"
             value = "556f63a821a1681ae3a3b9dd947c33da"
           }
-          image = "eu.gcr.io/projecto-demo-290916/flask-app:2021111401"
+          image = "eu.gcr.io/projecto-demo-290916/flask-app:resilenciav1"
           name  = "webapp"
           image_pull_policy = "Always"
           port {
