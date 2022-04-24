@@ -8,6 +8,7 @@ from market.weather_api import get_meteo_for_locality
 from flask import request
 from market  import api
 from flask_restful import Resource
+from market import simplebackend
 import requests
 
 
@@ -66,7 +67,11 @@ def logout_page():
     
 @app.route('/call-backend')
 def call_backend():
-    endpoint = "http://simple-backend"
+    if simplebackend:
+        endpoint = simplebackend
+    else:
+        endpoint = "http://simple-backend"
+
 
     r = requests.get(endpoint)
 

@@ -7,6 +7,7 @@ from flask_marshmallow import Marshmallow
 import os
 # LOADING ENVIRONMENT VARIABLES
 api_key = os.getenv('OPENWEATHERMAP_API_KEY')
+simplebackend = os.getenv('CALL_BACKEND')
 #
 app = Flask(__name__)
 

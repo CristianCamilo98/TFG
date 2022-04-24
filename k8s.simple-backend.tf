@@ -5,6 +5,30 @@ resource "kubernetes_service_account" "simple_backend" {
   }
 }
 
+resource "kubernetes_service" "simple_backend_slow" {
+  metadata {
+    name = "simple-backend-slow"
+    namespace = kubernetes_namespace.istio_namespace.metadata.0.name
+
+    labels = {
+      app = "simple-backend-slow"
+    }
+  }
+
+  spec {
+    port {
+      name        = "http"
+      protocol    = "TCP"
+      port        = 80
+      target_port = "8080"
+    }
+
+    selector = {
+      app = "simple-backend-slow"
+    }
+  }
+}
+
 resource "kubernetes_service" "simple_backend" {
   metadata {
     name = "simple-backend"
@@ -121,7 +145,7 @@ resource "kubernetes_deployment" "simple_backend_2" {
     name = "simple-backend-2"
 
     labels = {
-      app = "simple-backend"
+      app = "simple-backend-slow"
     }
   }
 
@@ -130,14 +154,14 @@ resource "kubernetes_deployment" "simple_backend_2" {
 
     selector {
       match_labels = {
-        app = "simple-backend"
+        app = "simple-backend-slow"
       }
     }
 
     template {
       metadata {
         labels = {
-          app = "simple-backend"
+          app = "simple-backend-slow"
         }
       }
 
@@ -169,7 +193,7 @@ resource "kubernetes_deployment" "simple_backend_2" {
 
           env {
             name  = "MESSAGE"
-            value = "Hello from simple-backend-2"
+            value = "Hello from simple-backend-slow"
           }
 
           env {
@@ -179,7 +203,7 @@ resource "kubernetes_deployment" "simple_backend_2" {
 
           env {
             name  = "TIMING_50_PERCENTILE"
-            value = "150ms"
+            value = "500ms"
           }
 
           env {

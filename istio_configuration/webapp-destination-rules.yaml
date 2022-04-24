@@ -9,6 +9,9 @@ metadata:
   name: webapp
 spec:
   host: webapp
+  trafficPolicy:
+    loadBalancer:
+      simple: LEAST_CONN
   subsets:
   - name: version-v1
     labels:
