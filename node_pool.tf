@@ -29,7 +29,7 @@ resource "google_container_node_pool" "np" {
 
   node_config {
     service_account = google_service_account.tfg_account.email
-    preemptible  = "false"
+    preemptible  = "true"
     machine_type = "n1-standard-1"
 
     disk_type    = "pd-ssd"
