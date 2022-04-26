@@ -78,7 +78,7 @@ def call_backend():
     if r.status_code == 200:
         return jsonify(r.json())
     else:
-        return "Error accesing simple-backend"
+        return "simplebackend did not respond", r.status_code
 
 
 
