@@ -5,29 +5,6 @@ resource "kubernetes_service_account" "simple_backend" {
   }
 }
 
-resource "kubernetes_service" "simple_backend_slow" {
-  metadata {
-    name = "simple-backend-slow"
-    namespace = kubernetes_namespace.istio_namespace.metadata.0.name
-
-    labels = {
-      app = "simple-backend-slow"
-    }
-  }
-
-  spec {
-    port {
-      name        = "http"
-      protocol    = "TCP"
-      port        = 80
-      target_port = "8080"
-    }
-
-    selector = {
-      app = "simple-backend-slow"
-    }
-  }
-}
 
 resource "kubernetes_service" "simple_backend" {
   metadata {
@@ -60,6 +37,7 @@ resource "kubernetes_deployment" "simple_backend_1" {
 
     labels = {
       app = "simple-backend"
+      version = "v1-fast"
     }
   }
 
@@ -69,12 +47,14 @@ resource "kubernetes_deployment" "simple_backend_1" {
     selector {
       match_labels = {
         app = "simple-backend"
+        version = "v1-fast"
       }
     }
 
     template {
       metadata {
         labels = {
+          version = "v1-fast"
           app = "simple-backend"
         }
       }
@@ -145,7 +125,8 @@ resource "kubernetes_deployment" "simple_backend_2" {
     name = "simple-backend-2"
 
     labels = {
-      app = "simple-backend-slow"
+      app = "simple-backend"
+      version = "v2-slow"
     }
   }
 
@@ -154,14 +135,16 @@ resource "kubernetes_deployment" "simple_backend_2" {
 
     selector {
       match_labels = {
-        app = "simple-backend-slow"
+        version = "v2-slow"
+        app = "simple-backend"
       }
     }
 
     template {
       metadata {
         labels = {
-          app = "simple-backend-slow"
+          version = "v2-slow"
+          app = "simple-backend"
         }
       }
 
