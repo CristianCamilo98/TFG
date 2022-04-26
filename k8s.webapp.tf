@@ -64,7 +64,7 @@ resource "kubernetes_deployment" "webapp" {
             name = "CALL_BACKEND"
             value = "http://simple-backend"
           }
-          image = "eu.gcr.io/projecto-demo-290916/flask-app:resilenciav2"
+          image = "eu.gcr.io/projecto-demo-290916/flask-app:resilencia-timeout"
           name  = "webapp"
           image_pull_policy = "Always"
           port {
