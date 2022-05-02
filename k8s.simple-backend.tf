@@ -42,7 +42,7 @@ resource "kubernetes_deployment" "simple_backend_1" {
   }
 
   spec {
-    replicas = 1
+    replicas = 2
 
     selector {
       match_labels = {
@@ -97,7 +97,7 @@ resource "kubernetes_deployment" "simple_backend_1" {
 
           env {
             name  = "TIMING_50_PERCENTILE"
-            value = "150ms"
+            value = "100ms"
           }
 
           env {
@@ -131,7 +131,7 @@ resource "kubernetes_deployment" "simple_backend_2" {
   }
 
   spec {
-    replicas = 2
+    replicas = 1
 
     selector {
       match_labels = {
@@ -180,13 +180,23 @@ resource "kubernetes_deployment" "simple_backend_2" {
           }
 
           env {
-            name  = "TIMING_VARIANCE"
-            value = "10ms"
+            name  = "TIMING_50_PERCENTILE"
+            value = "250ms"
           }
 
           env {
-            name  = "TIMING_50_PERCENTILE"
-            value = "500ms"
+            name  = "ERROR_RATE"
+            value = "0.3"
+          }
+
+          env {
+            name  = "ERROR_TYPE"
+            value = "http_error"
+          }
+
+          env {
+            name  = "ERROR_CODE"
+            value = "500"
           }
 
           env {

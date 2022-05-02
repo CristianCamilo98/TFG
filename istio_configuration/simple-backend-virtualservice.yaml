@@ -9,4 +9,6 @@ spec:
   - route:
     - destination:
         host: simple-backend
-    timeout: 0.4s
+    retries:
+      attempts: 3
+      retryOn: "connect-failure,refused-stream,5xx"
