@@ -1,6 +1,6 @@
 resource "kubernetes_service_account" "simple_backend" {
   metadata {
-    name = "simple-backend"
+    name      = "simple-backend"
     namespace = kubernetes_namespace.istio_namespace.metadata.0.name
   }
 }
@@ -8,7 +8,7 @@ resource "kubernetes_service_account" "simple_backend" {
 
 resource "kubernetes_service" "simple_backend" {
   metadata {
-    name = "simple-backend"
+    name      = "simple-backend"
     namespace = kubernetes_namespace.istio_namespace.metadata.0.name
 
     labels = {
@@ -33,10 +33,10 @@ resource "kubernetes_service" "simple_backend" {
 resource "kubernetes_deployment" "simple_backend_1" {
   metadata {
     namespace = kubernetes_namespace.istio_namespace.metadata.0.name
-    name = "simple-backend-1"
+    name      = "simple-backend-1"
 
     labels = {
-      app = "simple-backend"
+      app     = "simple-backend"
       version = "v1-fast"
     }
   }
@@ -46,7 +46,7 @@ resource "kubernetes_deployment" "simple_backend_1" {
 
     selector {
       match_labels = {
-        app = "simple-backend"
+        app     = "simple-backend"
         version = "v1-fast"
       }
     }
@@ -55,7 +55,7 @@ resource "kubernetes_deployment" "simple_backend_1" {
       metadata {
         labels = {
           version = "v1-fast"
-          app = "simple-backend"
+          app     = "simple-backend"
         }
       }
 
@@ -122,10 +122,10 @@ resource "kubernetes_deployment" "simple_backend_1" {
 resource "kubernetes_deployment" "simple_backend_2" {
   metadata {
     namespace = kubernetes_namespace.istio_namespace.metadata.0.name
-    name = "simple-backend-2"
+    name      = "simple-backend-2"
 
     labels = {
-      app = "simple-backend"
+      app     = "simple-backend"
       version = "v2-slow"
     }
   }
@@ -136,7 +136,7 @@ resource "kubernetes_deployment" "simple_backend_2" {
     selector {
       match_labels = {
         version = "v2-slow"
-        app = "simple-backend"
+        app     = "simple-backend"
       }
     }
 
@@ -144,7 +144,7 @@ resource "kubernetes_deployment" "simple_backend_2" {
       metadata {
         labels = {
           version = "v2-slow"
-          app = "simple-backend"
+          app     = "simple-backend"
         }
       }
 
