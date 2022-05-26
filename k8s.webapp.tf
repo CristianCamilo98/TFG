@@ -1,13 +1,13 @@
 resource "kubernetes_service_account" "sa_webapp" {
   metadata {
-    name = "webapp"
+    name      = "webapp"
     namespace = kubernetes_namespace.istio_namespace.metadata.0.name
   }
 }
 
 resource "kubernetes_service" "webapp_service" {
   metadata {
-    name = "webapp"
+    name      = "webapp"
     namespace = kubernetes_namespace.istio_namespace.metadata.0.name
     labels = {
       app = "webapp"
@@ -15,7 +15,7 @@ resource "kubernetes_service" "webapp_service" {
   }
   spec {
     selector = {
-      app = kubernetes_deployment.webapp.metadata.0.labels.app   
+      app = kubernetes_deployment.webapp.metadata.0.labels.app
     }
     port {
       port        = 80
@@ -30,25 +30,25 @@ resource "kubernetes_service" "webapp_service" {
 resource "kubernetes_deployment" "webapp" {
   metadata {
     namespace = kubernetes_namespace.istio_namespace.metadata.0.name
-    name = "webapp"
+    name      = "webapp"
     labels = {
-      app = "webapp"
+      app     = "webapp"
       version = "v1"
     }
   }
   spec {
-    replicas = 1
+    replicas = 5
 
     selector {
       match_labels = {
-        app = "webapp"
+        app     = "webapp"
         version = "v1"
       }
     }
     template {
       metadata {
         labels = {
-          app = "webapp"
+          app     = "webapp"
           version = "v1"
         }
       }
@@ -57,21 +57,21 @@ resource "kubernetes_deployment" "webapp" {
         service_account_name = kubernetes_service_account.sa_webapp.metadata.0.name
         container {
           env {
-            name = "OPENWEATHERMAP_API_KEY"
+            name  = "OPENWEATHERMAP_API_KEY"
             value = "556f63a821a1681ae3a3b9dd947c33da"
           }
           env {
-            name = "CALL_BACKEND"
+            name  = "CALL_BACKEND"
             value = "http://simple-backend"
           }
-          image = "eu.gcr.io/projecto-demo-290916/flask-app:resilencia-timeout"
-          name  = "webapp"
+          image             = "eu.gcr.io/projecto-demo-290916/flask-app:resilencia-timeout"
+          name              = "webapp"
           image_pull_policy = "Always"
           port {
             container_port = 8080
-            name = "http"
-            protocol = "TCP"
-            }
+            name           = "http"
+            protocol       = "TCP"
+          }
         }
       }
     }

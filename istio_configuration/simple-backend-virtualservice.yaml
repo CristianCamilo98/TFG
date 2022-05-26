@@ -10,5 +10,4 @@ spec:
     - destination:
         host: simple-backend
     retries:
-      attempts: 3
-      retryOn: "connect-failure,refused-stream,5xx"
+      attempts: 0

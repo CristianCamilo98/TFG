@@ -42,7 +42,7 @@ resource "kubernetes_deployment" "simple_backend_1" {
   }
 
   spec {
-    replicas = 2
+    replicas = 1
 
     selector {
       match_labels = {
@@ -92,7 +92,7 @@ resource "kubernetes_deployment" "simple_backend_1" {
 
           env {
             name  = "TIMING_VARIANCE"
-            value = "40ms"
+            value = "0ms"
           }
 
           env {
@@ -176,27 +176,32 @@ resource "kubernetes_deployment" "simple_backend_2" {
 
           env {
             name  = "MESSAGE"
-            value = "Hello from simple-backend-slow"
+            value = "Hello from simple-backend-1"
+          }
+
+          env {
+            name  = "TIMING_VARIANCE"
+            value = "0ms"
           }
 
           env {
             name  = "TIMING_50_PERCENTILE"
-            value = "250ms"
+            value = "100ms"
           }
 
           env {
             name  = "ERROR_RATE"
-            value = "0.3"
-          }
-
-          env {
-            name  = "ERROR_TYPE"
-            value = "http_error"
+            value = "1"
           }
 
           env {
             name  = "ERROR_CODE"
             value = "500"
+          }
+
+          env {
+            name  = "ERROR_TYPE"
+            value = "http_error"
           }
 
           env {

@@ -1,0 +1,12 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: simple-backend-dr
+spec:
+  host: simple-backend
+  trafficPolicy:
+    outlierDetection:
+      consecutive5xxErrors: 5
+      interval: 12s
+      baseEjectionTime: 1m
+      maxEjectionPercent: 100
