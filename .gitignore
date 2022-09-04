@@ -17,3 +17,7 @@ web-app-demo/schemas/
 web-app-demo/lib/python3.8/site-packages/
 web-app-demo/market/__pycache__/*
 preguntas_oscar
+web-app-demo/bin/pip3.10
+web-app-demo/bin/python3.10
+web-app-demo/include/site/python3.10/
+web-app-demo/lib/
